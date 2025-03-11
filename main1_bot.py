@@ -2,7 +2,7 @@ import json
 import os
 from telegram.ext import Application, CommandHandler
 
-TOKEN = 7862533064
+TOKEN = "7862533064:AAFJw0GRNglM8P8i0On0hV4DVxS5Mrr3q0Y"
 
 # JSON dosyasının adını belirle
 json_path = "meal.json"
