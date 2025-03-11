@@ -1,4 +1,4 @@
-￼enterimport json
+import json
 import os
 from telegram.ext import Application, CommandHandler
 
