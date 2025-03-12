@@ -1,8 +1,11 @@
 import json
 import os
+import threading
+from flask import Flask
 from telegram.ext import Application, CommandHandler
 
-TOKEN = "7862533064:AAFJw0GRNglM8P8i0On0hV4DVxS5Mrr3q0Y"
+# Çevresel değişkenlerden TOKEN al
+TOKEN = os.getenv("TOKEN")  # Render'daki Environment Variable'dan alıyor
 
 # JSON dosyasının adını belirle
 json_path = "meal.json"
@@ -19,13 +22,13 @@ except json.JSONDecodeError:
     meal_data = {}
     print("❌ JSON dosyası bozuk veya yanlış formatta!")
 
+# Ayet formatlama fonksiyonu
 def format_ayet(ayet):
-    """ Kullanıcının girdiği ayet numarasını uygun formata çevirir. """
     ayet = ayet.strip()
-    ayet = ayet.replace(".", ":")
-    ayet = ayet.replace(",", ":")
+    ayet = ayet.replace(".", ":").replace(",", ":")
     return ayet
 
+# Telegram bot komutları
 async def start(update, context):
     await update.message.reply_text("Merhaba! Ayet meali için ayet numarası girin. Örnek: 2:255")
 
@@ -37,9 +40,23 @@ async def get_meal(update, context):
         await update.message.reply_text("❌ Bu ayet bulunamadı.")
 
 # Telegram botunu başlat
-app = Application.builder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("ayet", get_meal))
+bot_app = Application.builder().token(TOKEN).build()
+bot_app.add_handler(CommandHandler("start", start))
+bot_app.add_handler(CommandHandler("ayet", get_meal))
 
-print("🚀 Bot çalışıyor...")
-app.run_polling()
+# Flask Uygulaması
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+# Botun Kesintisiz Çalışmasını Sağlayan Fonksiyon
+def run_bot():
+    print("🚀 Telegram Bot Başlatılıyor...")
+    bot_app.run_polling()
+
+# Flask Sunucusunu ve Botu Aynı Anda Çalıştır
+if __name__ == "__main__":
+    threading.Thread(target=run_bot).start()
+    app.run(host="0.0.0.0", port=10000)
