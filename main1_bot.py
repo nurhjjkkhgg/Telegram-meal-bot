@@ -4,7 +4,6 @@ import threading
 from flask import Flask
 from telegram.ext import Application, CommandHandler
 
-# Çevresel değişkenlerden TOKEN al
 TOKEN = os.getenv("TOKEN")  # Render'daki Environment Variable'dan alıyor
 
 # JSON dosyasının adını belirle
