@@ -7,7 +7,7 @@ from telegram.ext import Application, CommandHandler
 TOKEN = os.getenv("TOKEN")  # Render'daki Environment Variable'dan alıyor
 
 # JSON dosyasının adını belirle
-json_path = "meal.json"
+json_path = "meal_complete.json"
 
 # JSON'u oku
 try:
