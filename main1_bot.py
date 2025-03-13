@@ -64,7 +64,8 @@ def run_bot():
 
 # ✅ Flask Sunucusunu ve Botu Aynı Anda Çalıştır
 if __name__ == "__main__":
-    threading.Thread(target=run_bot, daemon=True).start()
-    app.run(hosimport os
-PORT = int(os.environ.get("PORT", 10000))  # Render tarafından atanmış portu al, yoksa 10000 kullan
-app.run(host="0.0.0.0", port=PORT)
+    threading.Thread(target=run_bot).start()
+    
+    # Port bilgisini al, yoksa varsayılan olarak 10000 kullan
+    PORT = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=PORT)
