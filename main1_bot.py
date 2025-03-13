@@ -4,8 +4,9 @@ import threading
 from flask import Flask
 from telegram.ext import Application, CommandHandler
 
-# Telegram Bot Token (DOĞRUDAN KODA EKLENMİŞ HALİ)
-TOKEN = "7718362355:AAFdr3eOdUWztw3QOWrfoZcdlvNXSIT4FoI.."
+# Telegram Bot Token (Render'dan al)
+TOKEN = os.getenv("TOKEN")  # Render'daki Environment Variable'dan alıyor
+print("TOKEN DEĞERİ:", TOKEN)  # Debug için ekledik
 
 # JSON dosyasının adını belirle
 json_path = "meal_complete.json"
