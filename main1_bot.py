@@ -9,7 +9,7 @@ TOKEN = os.getenv("TOKEN")  # Render'daki Environment Variable'dan alıyor
 print("TOKEN DEĞERİ:", TOKEN)  # Debug için ekledik
 
 # JSON dosyasının adını belirle
-json_path = "meal_complete.json"
+json_path = "meal_complete (1).json"
 
 # JSON'u oku
 try:
